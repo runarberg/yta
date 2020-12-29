@@ -23,7 +23,7 @@ pipe(
 Or if you use the [proposed pipeline operator][proposal/pipeline-operator]:
 
 ```js
-import { aside, drop, map, pipe, range, reduce, take } from "andcetera";
+import { aside, drop, map, range, reduce, take } from "andcetera/sync";
 
 // Sum of the first five squares and log them to the console as they pass by.
 range()

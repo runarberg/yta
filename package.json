@@ -2,11 +2,16 @@
   "name": "andcetera",
   "version": "0.1.0",
   "description": "Tools to further your iterator pipelines",
-  "main": "src/index.js",
   "type": "module",
+  "main": "src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./async": "./src/async/index.js",
+    "./sync": "./src/sync/index.js"
+  },
   "scripts": {
     "check": "tsc",
-    "docs": "typedoc src/index.js",
+    "docs": "typedoc src/index.js src/sync/index.js src/async/index.js",
     "lint": "eslint --ignore-path .ignore .",
     "lint:fix": "npm run lint -- --fix",
     "test": "c8 ava",
@@ -42,10 +47,11 @@
   "eslintConfig": {
     "env": {
       "node": false,
-      "browser": true
+      "browser": true,
+      "es2021": true
     },
     "parserOptions": {
-      "ecmaVersion": "2020",
+      "ecmaVersion": "2021",
       "sourceType": "module"
     },
     "extends": [

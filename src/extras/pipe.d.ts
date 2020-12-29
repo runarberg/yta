@@ -1,3 +1,20 @@
+/**
+ * Create a pipeline for chaining iterator with operators.
+ *
+ * ```js
+ * import { drop, filter, map, pipe, range, reduce, take } from "andcetera";
+ *
+ * pipe(
+ *   range(),
+ *   drop(10),
+ *   filter((x) => x % 2 === 0),
+ *   map((x) => x * 2),
+ *   take(5),
+ *   reduce((sum, x) => sum + x, 0),
+ * );
+ * // => 140
+ * ```
+ */
 declare function pipe<S>(source: S): S;
 declare function pipe<S, R>(source: S, fn: (s: S) => R): R;
 declare function pipe<S, U1, R>(

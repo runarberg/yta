@@ -9,7 +9,7 @@ import {
   reduce,
   take,
   toArray,
-} from "../index.js";
+} from "../sync/index.js";
 
 import pipe from "./pipe.js";
 
