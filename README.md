@@ -19,22 +19,3 @@ pipe(
 );
 // => 55
 ```
-
-Or if you use the [proposed pipeline operator][proposal/pipeline-operator]:
-
-```js
-import { aside, drop, map, range, reduce, take } from "andcetera/sync";
-
-// Sum of the first five squares and log them to the console as they pass by.
-range()
-  |> drop(1)
-  |> take(5)
-  |> map((n) => n ** 2)
-  |> aside((square) => console.log(square))
-  |> reduce((sum, square) => sum + square, 0);
-// => 55
-// Logs 1, 4, 9, 16, 25
-```
-
-[npm/itertools]: https://www.npmjs.com/package/itertools
-[proposal/pipeline-operator]: https://github.com/tc39/proposal-pipeline-operator
