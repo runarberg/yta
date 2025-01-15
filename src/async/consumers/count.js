@@ -2,8 +2,8 @@
  * Count the items in the iterator and consume it.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { count, range } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { count, range } from "yta/async";
  *
  * pipe(range(10), count());
  * // => 10

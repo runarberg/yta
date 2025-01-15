@@ -1,11 +1,11 @@
 /**
  * Map the iterator with a function that can access the previous result. Works
- * similar to [[`reduce`]] except that instead of returning a single value, we
+ * similar to {@link reduce} except that instead of returning a single value, we
  * yield on every iteration and return the new iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { accumulate, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { accumulate, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(1, 6),
@@ -19,8 +19,8 @@
  * items.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { accumulate, drop, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { accumulate, drop, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(1, 6),
@@ -33,8 +33,8 @@
  *
  * **See also:**
  *
- * - [[`recurrent`]]
- * - [[`reduce`]]
+ * - {@link recurrent}
+ * - {@link reduce}
  *
  * @template A - The input item type
  * @template B - The output item type

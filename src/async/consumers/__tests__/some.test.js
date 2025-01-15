@@ -1,32 +1,35 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import some from "../some.js";
 
-test("not some", async (t) => {
-  const result = await pipe(
-    of(1, 3, 5),
-    some((n) => n % 2 === 0),
-  );
+suite("async/consumers/some", () => {
+  test("not some", async () => {
+    const result = await pipe(
+      of(1, 3, 5),
+      some((n) => n % 2 === 0),
+    );
 
-  t.is(result, false);
-});
+    assert.equal(result, false);
+  });
 
-test("some", async (t) => {
-  const result = await pipe(
-    of("foo", "bar", "baz"),
-    some((str) => str.startsWith("b")),
-  );
+  test("some", async () => {
+    const result = await pipe(
+      of("foo", "bar", "baz"),
+      some((str) => str.startsWith("b")),
+    );
 
-  t.is(result, true);
-});
+    assert.equal(result, true);
+  });
 
-test("empty", async (t) => {
-  const result = await pipe(
-    of(),
-    some(() => true),
-  );
+  test("empty", async () => {
+    const result = await pipe(
+      of(),
+      some(() => true),
+    );
 
-  t.is(result, false);
+    assert.equal(result, false);
+  });
 });

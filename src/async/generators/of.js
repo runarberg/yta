@@ -2,7 +2,7 @@
  * Create an async iterator by resolving each of the arguments in order.
  *
  * ```js
- * import { of } from "andcetera";
+ * import { of } from "yta";
  *
  * const arr = [];
  * const items = of(

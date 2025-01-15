@@ -3,8 +3,8 @@
  * returns true.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { find, of } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { find, of } from "yta/sync";
  *
  * pipe(
  *   of(

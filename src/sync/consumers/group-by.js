@@ -6,8 +6,8 @@
  * means you are free to chain another operator after it’s consumed.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { group-by, map, of } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { group-by, map, of } from "yta/sync";
  *
  * pipe(
  *   of(

@@ -1,18 +1,21 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import of from "../of.js";
 
-test("generate of", (t) => {
-  const iter = of(1, 2, 3)[Symbol.iterator]();
+suite("sync/generators/of", () => {
+  test("of", () => {
+    const iter = of(1, 2, 3)[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: 2, done: false });
-  t.deepEqual(iter.next(), { value: 3, done: false });
-  t.deepEqual(iter.next(), { value: undefined, done: true });
-});
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: 2, done: false });
+    assert.deepEqual(iter.next(), { value: 3, done: false });
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
+  });
 
-test("empty", (t) => {
-  const iter = of()[Symbol.iterator]();
+  test("empty", () => {
+    const iter = of()[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
+    assert.equal(iter.next().done, true);
+  });
 });

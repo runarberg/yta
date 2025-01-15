@@ -1,32 +1,35 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import every from "../every.js";
 
-test("every", async (t) => {
-  const result = await pipe(
-    of(2, 4, 6),
-    every((n) => n % 2 === 0),
-  );
+suite("async/consumers/every", () => {
+  test("every", async () => {
+    const result = await pipe(
+      of(2, 4, 6),
+      every((n) => n % 2 === 0),
+    );
 
-  t.is(result, true);
-});
+    assert.equal(result, true);
+  });
 
-test("not every", async (t) => {
-  const result = await pipe(
-    of(2, 4, 6, 7, 8),
-    every((n) => n % 2 === 0),
-  );
+  test("not every", async () => {
+    const result = await pipe(
+      of(2, 4, 6, 7, 8),
+      every((n) => n % 2 === 0),
+    );
 
-  t.is(result, false);
-});
+    assert.equal(result, false);
+  });
 
-test("empty", async (t) => {
-  const result = await pipe(
-    of(),
-    every(() => false),
-  );
+  test("empty", async () => {
+    const result = await pipe(
+      of(),
+      every(() => false),
+    );
 
-  t.is(result, true);
+    assert.equal(result, true);
+  });
 });

@@ -1,17 +1,20 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import forEach from "../for-each.js";
 
-test("forEach", (t) => {
-  /** @type string[][] */
-  const calls = [];
+suite("sync/consumers/for-each", () => {
+  test("forEach", () => {
+    /** @type {string[][]} */
+    const calls = [];
 
-  pipe(
-    of("a", "b", "c"),
-    forEach((...args) => calls.push(args)),
-  );
+    pipe(
+      of("a", "b", "c"),
+      forEach((...args) => calls.push(args)),
+    );
 
-  t.deepEqual(calls, [["a"], ["b"], ["c"]]);
+    assert.deepEqual(calls, [["a"], ["b"], ["c"]]);
+  });
 });

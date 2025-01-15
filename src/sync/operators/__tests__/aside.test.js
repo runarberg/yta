@@ -1,24 +1,27 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import aside from "../aside.js";
 
-test("aside", (t) => {
-  /** @type string[][] */
-  const calls = [];
+suite("sync/operators/aside", () => {
+  test("aside", () => {
+    /** @type {string[][]} */
+    const calls = [];
 
-  const pipeline = pipe(
-    of("a", "b", "c"),
-    aside((...args) => calls.push(args)),
-  );
+    const pipeline = pipe(
+      of("a", "b", "c"),
+      aside((...args) => calls.push(args)),
+    );
 
-  const iter = pipeline[Symbol.iterator]();
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: "a", done: false });
-  t.deepEqual(iter.next(), { value: "b", done: false });
-  t.deepEqual(iter.next(), { value: "c", done: false });
-  t.deepEqual(iter.next(), { value: undefined, done: true });
+    assert.deepEqual(iter.next(), { value: "a", done: false });
+    assert.deepEqual(iter.next(), { value: "b", done: false });
+    assert.deepEqual(iter.next(), { value: "c", done: false });
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
 
-  t.deepEqual(calls, [["a"], ["b"], ["c"]]);
+    assert.deepEqual(calls, [["a"], ["b"], ["c"]]);
+  });
 });

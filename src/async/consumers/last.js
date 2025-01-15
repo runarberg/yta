@@ -2,8 +2,8 @@
  * Get the last item of a sequence, or `undefined` if the sequence is empty.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, last } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { of, last } from "yta/async";
  *
  * await pipe(of("foo", "bar", "baz", "quux"), last());
  * // => "quux"
@@ -11,8 +11,8 @@
  *
  * **See also:**
  *
- * * [[`at`]]
- * * [[`first`]]
+ * - {@link at}
+ * - {@link first}
  *
  * @template A
  * @returns {(items: AsyncIterable<A>) => Promise<A | undefined>}

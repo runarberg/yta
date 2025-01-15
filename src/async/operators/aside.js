@@ -5,8 +5,8 @@ import map from "./map.js";
  * for inspecting items they pass through a pipeline.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { aside, map, of, toArray } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { aside, map, of, toArray } from "yta/async";
  *
  * pipe(
  *   of(0, 1, 2, 3, 4),
@@ -21,13 +21,12 @@ import map from "./map.js";
  *
  * **See also:**
  *
- * - [[`forEach`]]
+ * - {@link forEach}
  *
  * @template A - The item type
  * @param {(item: A) => void} fn - The side effect producing function
  * @returns {(items: AsyncIterable<A>) => AsyncGenerator<A, void>}
  */
-
 export default function aside(fn) {
   return map((item) => {
     fn(item);

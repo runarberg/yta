@@ -4,8 +4,8 @@
  * promises and want to iterate through the results.
  *
  * ```js
- * import { async, pipe, sync } from "andcetera";
- * import { asAsync } from "andcetera/sync";
+ * import { async, pipe, sync } from "yta";
+ * import { asAsync } from "yta/sync";
  *
  * await pipe(sync.range(5), asAsync(), async.toArray());
  * // => [0, 1, 2, 3, 4]

@@ -2,8 +2,8 @@
  * Get the last item of a sequence, or `undefined` if the sequence is empty.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, last } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { of, last } from "yta/sync";
  *
  * pipe(of("foo", "bar", "baz", "quux"), last());
  * // => "quux"
@@ -11,8 +11,8 @@
  *
  * **See also:**
  *
- * * [[`at`]]
- * * [[`first`]]
+ * - {@link at}
+ * - {@link first}
  *
  * @template A
  * @returns {(items: Iterable<A>) => A | undefined}

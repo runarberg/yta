@@ -4,15 +4,15 @@ import some from "./some.js";
  * Consumes the iterator into true if the item is in the sequence.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { includes, of } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { includes, of } from "yta/sync";
  *
  * pipe(of(1, 3, 5), includes(3));
  * // => true
  * ```
  *
  * ```js
- * import { includes, of, pipe } from "andcetera";
+ * import { includes, of, pipe } from "yta";
  *
  * pipe(of("foo", "bar", "baz"), includes("quux"));
  * // => false

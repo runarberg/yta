@@ -3,8 +3,8 @@
  * tuples. Closes after the shortest of the inputs closes.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { flatRepeat, of, range, toArray, zip } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { flatRepeat, of, range, toArray, zip } from "yta/sync";
  *
  * pipe(
  *   zip(
@@ -21,8 +21,8 @@
  * spread opperator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { flatRepeat, of, range, toArray, zip } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { flatRepeat, of, range, toArray, zip } from "yta/sync";
  *
  * pipe(
  *   of(
@@ -38,7 +38,7 @@
  *
  * **See also:**
  *
- * * [[`zipLongest`]]
+ * - {@link zipLongest}
  *
  * @template {unknown[]} A - Tuple type with item type of each input iterator
  * @param {{ [K in keyof A]: Iterable<A[K]> }} items - The iterators to be zipped

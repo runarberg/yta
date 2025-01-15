@@ -2,8 +2,8 @@
  * Drop the first n items from the iterator and continue from there.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { drop, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { drop, range, toArray } from "yta/sync";
  *
  * pipe(range(15), drop(10), toArray());
  * // => [10, 11, 12, 13, 14]
@@ -14,8 +14,8 @@
  * iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { drop, range, toArray } from "andcetera";
+ * import { pipe } from "yta";
+ * import { drop, range, toArray } from "yta";
  *
  * pipe(range(15), drop(-10), toArray());
  * // => [0, 1, 2, 3, 4]
@@ -27,9 +27,9 @@
  *
  * **See also:**
  *
- * * [[`dropWhile`]]
- * * [[`slice`]]
- * * [[`take`]]
+ * - {@link dropWhile}
+ * - {@link slice}
+ * - {@link take}
  *
  * @template A - The item type
  * @param {number} n - The number of items to drop

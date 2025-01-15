@@ -2,8 +2,8 @@
  * Create an iterator of iterators that repeats n times (defaults to indefinetly).
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { range, repeat, take, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { range, repeat, take, toArray } from "yta/sync";
  *
  * pipe(
  *   repeat(() => pipe(range(), take(3))),
@@ -17,8 +17,8 @@
  * If you provide `n` as a second argument, repeat the sequence `n` many times.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, repeat, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { of, repeat, toArray } from "yta/sync";
  *
  * pipe(
  *   repeat(() => of(1, -1), 3),
@@ -30,8 +30,8 @@
  *
  * **See also:**
  *
- * * [[`cycle`]]
- * * [[`flatRepeat`]]
+ * - {@link cycle}
+ * - {@link flatRepeat}
  *
  * @template A
  * @template {Iterable<A>} I

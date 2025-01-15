@@ -1,0 +1,5 @@
+.ignore
+**/*.test.js
+**/*.config.js
+coverage/
+docs/

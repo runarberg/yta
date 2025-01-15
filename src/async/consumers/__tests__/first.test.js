@@ -1,17 +1,20 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import first from "../first.js";
 
-test("first", async (t) => {
-  const result = await pipe(of("foo", "bar", "baz", "quux"), first());
+suite("async/consumers/first", () => {
+  test("first", async () => {
+    const result = await pipe(of("foo", "bar", "baz", "quux"), first());
 
-  t.is(result, "foo");
-});
+    assert.equal(result, "foo");
+  });
 
-test("first of empty", async (t) => {
-  const result = await pipe(of(), first());
+  test("first of empty", async () => {
+    const result = await pipe(of(), first());
 
-  t.is(result, undefined);
+    assert.equal(result, undefined);
+  });
 });

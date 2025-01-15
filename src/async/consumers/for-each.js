@@ -3,9 +3,9 @@
  * Returns a promise that resolves when the iteration is finished.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { asAsync, range } from "andcetera/sync";
- * import { forEach } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { asAsync, range } from "yta/sync";
+ * import { forEach } from "yta/async";
  *
  * await pipe(
  *   range(5),
@@ -18,7 +18,7 @@
  *
  * **See also:**
  *
- * * [[`aside`]]
+ * - {@link aside}
  *
  * @template A
  * @param {(item: A) => void} fn - The side effect function

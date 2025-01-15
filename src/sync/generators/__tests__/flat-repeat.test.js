@@ -1,30 +1,33 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { of } from "../../index.js";
 import flatRepeat from "../flat-repeat.js";
 
-test("flat repeat indefinitely", (t) => {
-  const pipeline = flatRepeat(() => of(1, -1));
-  const iter = pipeline[Symbol.iterator]();
+suite("sync/generators/flat-repeat", () => {
+  test("flat repeat indefinitely", () => {
+    const pipeline = flatRepeat(() => of(1, -1));
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-});
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+  });
 
-test("flat repeat n times", (t) => {
-  const pipeline = flatRepeat(() => of(1, -1), 3);
-  const iter = pipeline[Symbol.iterator]();
+  test("flat repeat n times", () => {
+    const pipeline = flatRepeat(() => of(1, -1), 3);
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: -1, done: false });
-  t.deepEqual(iter.next(), { value: undefined, done: true });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: -1, done: false });
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
+  });
 });

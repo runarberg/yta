@@ -7,8 +7,8 @@ import map from "./map.js";
  * Map each item into an iterator and flatten.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { flatMap, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { flatMap, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(4),
@@ -20,9 +20,9 @@ import map from "./map.js";
  *
  * **See also:**
  *
- * - [[`flat`]]
- * - [[`flatRepeat`]]
- * - [[`map`]]
+ * - {@link flat}
+ * - {@link flatRepeat}
+ * - {@link map}
  *
  * @template A - The input type
  * @template B - The output type

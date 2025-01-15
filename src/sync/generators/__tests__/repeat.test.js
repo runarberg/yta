@@ -1,54 +1,56 @@
-import test from "ava";
+import test, { suite } from "node:test";
 
 import { of } from "../../index.js";
 import repeat from "../repeat.js";
 
-test("repeat indefinitely", (t) => {
-  t.plan(10);
+suite("sync/generators/repeat", () => {
+  test("repeat indefinitely", (t) => {
+    t.plan(10);
 
-  const pipeline = repeat(() => of(1, -1));
-  const iter = pipeline[Symbol.iterator]();
+    const pipeline = repeat(() => of(1, -1));
+    const iter = pipeline[Symbol.iterator]();
 
-  for (let i = 0; i < 3; i += 1) {
-    const next = iter.next();
+    for (let i = 0; i < 3; i += 1) {
+      const next = iter.next();
 
-    if (next.done) {
-      t.fail("Iterator finished early");
+      if (next.done) {
+        t.assert.fail("Iterator finished early");
 
-      return;
+        return;
+      }
+
+      const inner = next.value[Symbol.iterator]();
+
+      t.assert.deepEqual(inner.next(), { value: 1, done: false });
+      t.assert.deepEqual(inner.next(), { value: -1, done: false });
+      t.assert.deepEqual(inner.next(), { value: undefined, done: true });
     }
 
-    const inner = next.value[Symbol.iterator]();
+    t.assert.equal(iter.next().done, false);
+  });
 
-    t.deepEqual(inner.next(), { value: 1, done: false });
-    t.deepEqual(inner.next(), { value: -1, done: false });
-    t.deepEqual(inner.next(), { value: undefined, done: true });
-  }
+  test("repeat n times", (t) => {
+    t.plan(10);
 
-  t.is(iter.next().done, false);
-});
+    const pipeline = repeat(() => of(1, -1), 3);
+    const iter = pipeline[Symbol.iterator]();
 
-test("repeat n times", (t) => {
-  t.plan(10);
+    for (let i = 0; i < 3; i += 1) {
+      const next = iter.next();
 
-  const pipeline = repeat(() => of(1, -1), 3);
-  const iter = pipeline[Symbol.iterator]();
+      if (next.done) {
+        t.assert.fail("Iterator finished early");
 
-  for (let i = 0; i < 3; i += 1) {
-    const next = iter.next();
+        return;
+      }
 
-    if (next.done) {
-      t.fail("Iterator finished early");
+      const inner = next.value[Symbol.iterator]();
 
-      return;
+      t.assert.deepEqual(inner.next(), { value: 1, done: false });
+      t.assert.deepEqual(inner.next(), { value: -1, done: false });
+      t.assert.deepEqual(inner.next(), { value: undefined, done: true });
     }
 
-    const inner = next.value[Symbol.iterator]();
-
-    t.deepEqual(inner.next(), { value: 1, done: false });
-    t.deepEqual(inner.next(), { value: -1, done: false });
-    t.deepEqual(inner.next(), { value: undefined, done: true });
-  }
-
-  t.is(iter.next().done, true);
+    t.assert.equal(iter.next().done, true);
+  });
 });

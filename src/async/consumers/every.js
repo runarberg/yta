@@ -2,8 +2,8 @@
  * Consumes the iterator into true if predicate holds true for every item in the sequence.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { every, of } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { every, of } from "yta/async";
  *
  * await pipe(
  *   of(2, 4, 6),
@@ -26,7 +26,7 @@
  *
  * **See also:**
  *
- * * [[`some`]]
+ * - {@link some}
  *
  * @template A
  * @param {(item: A) => boolean} p The predicate function

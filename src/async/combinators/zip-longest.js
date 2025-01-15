@@ -4,8 +4,8 @@
  * closed, putting `undefined` in the place of closed iterators.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { flatRepeat, of, take, toArray, zipLongest } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { flatRepeat, of, take, toArray, zipLongest } from "yta/async";
  *
  * await pipe(
  *   zipLongest(
@@ -29,7 +29,7 @@
  *
  * **See also:**
  *
- * * [[`zip`]]
+ * - {@link zip}
  *
  * @template {unknown[]} A - Tuple type with item type of each input iterator
  * @param {{ [K in keyof A]: AsyncIterable<A[K]> }} items - The iterators to be
@@ -44,9 +44,9 @@ export default async function* zipLongest(...items) {
     let results = await nexts();
 
     while (results.some(({ done }) => !done)) {
-      yield /** @type {{ [K in keyof A]: A[K] | undefined }} */ (results.map(
-        ({ value }) => value,
-      ));
+      yield /** @type {{ [K in keyof A]: A[K] | undefined }} */ (
+        results.map(({ value }) => value)
+      );
 
       results = await nexts();
     }

@@ -5,7 +5,7 @@ import { flat } from "../index.js";
  * Take any number of iterators and run them in a single series, one after the other.
  *
  * ```js
- * import { chain, range } from "andcetera/sync";
+ * import { chain, range } from "yta/sync";
  *
  * [...chain(range(0, 3), range(3, 6))];
  * // => [0, 1, 2, 3, 4, 5]
@@ -13,7 +13,7 @@ import { flat } from "../index.js";
  *
  * **See also:**
  *
- * * [[`flat`]]
+ * - {@link flat}
  *
  * @template A
  * @param {Iterable<A>[]} items

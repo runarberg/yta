@@ -2,8 +2,8 @@
  * Map each item in the iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { map, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { map, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(3),
@@ -14,7 +14,7 @@
  *
  * **See also:**
  *
- * - [[`flatMap`]]
+ * - {@link flatMap}
  *
  * @template A - The input type
  * @template B - The output type

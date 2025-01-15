@@ -2,8 +2,8 @@
  * Filter items in the iterator leaving only the items that fulfill the predicate.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { filter, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { filter, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(10),

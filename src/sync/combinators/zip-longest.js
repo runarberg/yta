@@ -4,7 +4,7 @@
  * closed, putting `undefined` in the place of closed iterators.
  *
  * ```js
- * import { pipe } from "andcetera";
+ * import { pipe } from "yta";
  * import {
  *   flatRepeat,
  *   of,
@@ -12,7 +12,7 @@
  *   take,
  *   toArray,
  *   zipLongest,
- * } from "andcetera/sync";
+ * } from "yta/sync";
  *
  * pipe(
  *   zipLongest(
@@ -36,7 +36,7 @@
  *
  * **See also:**
  *
- * * [[`zip`]]
+ * - {@link zip}
  *
  * @template {unknown[]} A - Tuple type with item type of each input iterator
  * @param {{ [K in keyof A]: Iterable<A[K]> }} items - The iterators to be
@@ -49,9 +49,9 @@ export default function* zipLongest(...items) {
   try {
     let results = iters.map((iter) => iter.next());
     while (results.some(({ done }) => !done)) {
-      yield /** @type {{ [K in keyof A]: A[K] | undefined }} */ (results.map(
-        ({ value }) => value,
-      ));
+      yield /** @type {{ [K in keyof A]: A[K] | undefined }} */ (
+        results.map(({ value }) => value)
+      );
 
       results = iters.map((iter) => iter.next());
     }

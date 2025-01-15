@@ -1,11 +1,11 @@
 /**
  * Generate a sequence with a recurrent relationship by applying a function
- * to the previous state. Similar to [[`accumulate`]] but generates a new
+ * to the previous state. Similar to {@link accumulate} but generates a new
  * sequence from scratch.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { map, recurrent, take, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { map, recurrent, take, toArray } from "yta/sync";
  *
  * pipe(
  *   recurrent(([a, b]) => [b, a + b], [0, 1]),
@@ -18,8 +18,8 @@
  *
  * **See also:**
  *
- * - [[`accumulate`]]
- * - [[`reduce`]]
+ * - {@link accumulate}
+ * - {@link reduce}
  *
  * @template A
  * @param {(state: A) => A} fn

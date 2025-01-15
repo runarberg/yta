@@ -2,9 +2,9 @@
  * Take a specific number of items from the front sequence and drop the rest.
  *
  * ```js
- * import { pipe } from "andcetera"
- * import { take, toArray } from "andcetera/async";
- * import { asAsync, range } from "andcetera/sync";
+ * import { pipe } from "yta"
+ * import { take, toArray } from "yta/async";
+ * import { asAsync, range } from "yta/sync";
  *
  * await pipe(range(15), toAsync(), take(5), toArray());
  * // => [0, 1, 2, 3, 4]
@@ -20,9 +20,9 @@
  * operator.
  *
  * ```js
- * import { pipe } from "andcetera"
- * import { take, toArray } from "andcetera/async";
- * import { asAsync, range } from "andcetera/sync";
+ * import { pipe } from "yta"
+ * import { take, toArray } from "yta/async";
+ * import { asAsync, range } from "yta/sync";
  *
  * await pipe(range(15) asAsync(), take(-5), toArray());
  * // => [10, 11, 12, 13, 14]
@@ -34,9 +34,9 @@
  *
  * **See also:**
  *
- * - [[`slice`]]
- * - [[`take`]]
- * - [[`takeWhile`]]
+ * - {@link slice}
+ * - {@link take}
+ * - {@link takeWhile}
  *
  * @template A - The item type
  * @param {number} n - The number of items to take

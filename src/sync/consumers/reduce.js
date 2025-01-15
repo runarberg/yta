@@ -2,8 +2,8 @@
  * Consume the iterator resulting in a single value.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import , range, reduce } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import , range, reduce } from "yta/sync";
  *
  * pipe(
  *   range(10),
@@ -14,8 +14,8 @@
  *
  * **See also:**
  *
- * - [[`accumulate`]]
- * - [[`recurrent`]]
+ * - {@link accumulate}
+ * - {@link recurrent}
  *
  * @template A - The input type
  * @template B - The output value type

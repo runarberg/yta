@@ -2,9 +2,9 @@
  * Drop the first n items from the iterator and continue from there.
  *
  * ```js
- * import { pipe } from "andcetera";
+ * import { pipe } from "yta";
  * import { asAsync, range } from "andceter/sync";
- * import { drop, toArray } from "andcetera/async";
+ * import { drop, toArray } from "yta/async";
  *
  * await pipe(range(15), asAsync(), drop(10), toArray());
  * // => [10, 11, 12, 13, 14]
@@ -15,9 +15,9 @@
  * iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
+ * import { pipe } from "yta";
  * import { asAsync, range } from "andceter/sync";
- * import { drop, toArray } from "andcetera/async";
+ * import { drop, toArray } from "yta/async";
  *
  * await pipe(range(15), asAsync() drop(-10), toArray());
  * // => [0, 1, 2, 3, 4]
@@ -29,9 +29,9 @@
  *
  * **See also:**
  *
- * * [[`dropWhile`]]
- * * [[`slice`]]
- * * [[`take`]]
+ * - {@link dropWhile}
+ * - {@link slice}
+ * - {@link take}
  *
  * @template A The item type
  * @param {number} n The number of items to drop

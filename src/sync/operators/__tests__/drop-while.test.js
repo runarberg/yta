@@ -1,73 +1,74 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of, range } from "../../index.js";
 import dropWhile from "../drop-while.js";
 
-test("dropWhile", (t) => {
-  const pipeline = pipe(
-    range(10),
-    dropWhile((n) => n < 5),
-  );
+suite("sync/operators/drop-while", () => {
+  test("dropWhile", () => {
+    const pipeline = pipe(
+      range(10),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.iterator]();
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
-  t.deepEqual(iter.next(), { value: 6, done: false });
-  t.deepEqual(iter.next(), { value: 7, done: false });
-  t.deepEqual(iter.next(), { value: 8, done: false });
-  t.deepEqual(iter.next(), { value: 9, done: false });
-  t.deepEqual(iter.next(), { value: undefined, done: true });
-});
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.deepEqual(iter.next(), { value: 6, done: false });
+    assert.deepEqual(iter.next(), { value: 7, done: false });
+    assert.deepEqual(iter.next(), { value: 8, done: false });
+    assert.deepEqual(iter.next(), { value: 9, done: false });
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
+  });
 
-test("drop all", (t) => {
-  const pipeline = pipe(
-    range(5),
-    dropWhile((n) => n < 5),
-  );
+  test("drop all", () => {
+    const pipeline = pipe(
+      range(5),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.iterator]();
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: undefined, done: true });
-});
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
+  });
 
-test("empty", (t) => {
-  const pipeline = pipe(
-    of(),
-    dropWhile((n) => n < 5),
-  );
+  test("empty", () => {
+    const pipeline = pipe(
+      of(),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.iterator]();
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: undefined, done: true });
-});
+    assert.deepEqual(iter.next(), { value: undefined, done: true });
+  });
 
-test("closes child on return", (t) => {
-  const child = range();
-  const pipeline = pipe(
-    child,
-    dropWhile((n) => n < 5),
-  );
-  const iter = pipeline[Symbol.iterator]();
+  test("closes child on return", () => {
+    const child = range();
+    const pipeline = pipe(
+      child,
+      dropWhile((n) => n < 5),
+    );
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
+    assert.deepEqual(iter.next(), { value: 5, done: false });
 
-  iter.return();
+    iter.return();
 
-  t.is(child.next().done, true);
-});
+    assert.equal(child.next().done, true);
+  });
 
-test("closes children on throw", (t) => {
-  const child = range();
-  const pipeline = pipe(
-    child,
-    dropWhile((n) => n < 5),
-  );
-  const iter = pipeline[Symbol.iterator]();
+  test("closes children on throw", () => {
+    const child = range();
+    const pipeline = pipe(
+      child,
+      dropWhile((n) => n < 5),
+    );
+    const iter = pipeline[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
-
-  t.throws(() => iter.throw(new Error("BOOM")));
-
-  t.is(child.next().done, true);
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.throws(() => iter.throw(new Error("BOOM")));
+    assert.equal(child.next().done, true);
+  });
 });

@@ -2,9 +2,9 @@
  * Consume an async iterator resulting in a single promise.
  *
  * ```js
- * import { asAsync, pipe } from "andcetera";
- * import { reduce } from "andcetera/async";
- * import { range } from "andcetera/sync";
+ * import { asAsync, pipe } from "yta";
+ * import { reduce } from "yta/async";
+ * import { range } from "yta/sync";
  *
  * await pipe(
  *   range(10),

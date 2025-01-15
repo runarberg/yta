@@ -1,118 +1,121 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { range } from "../../index.js";
 import slice from "../slice.js";
 
-test("empty slice", (t) => {
-  const iter = pipe(range(), slice(0, 0))[Symbol.iterator]();
+suite("sync/operators/slice", () => {
+  test("empty slice", () => {
+    const iter = pipe(range(), slice(0, 0))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
-});
+    assert.equal(iter.next().done, true);
+  });
 
-test("positive start slice", (t) => {
-  const iter = pipe(range(0, 10), slice(0, 5))[Symbol.iterator]();
+  test("positive start slice", () => {
+    const iter = pipe(range(0, 10), slice(0, 5))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 0, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: 2, done: false });
-  t.deepEqual(iter.next(), { value: 3, done: false });
-  t.deepEqual(iter.next(), { value: 4, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 0, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: 2, done: false });
+    assert.deepEqual(iter.next(), { value: 3, done: false });
+    assert.deepEqual(iter.next(), { value: 4, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("positive middle slice", (t) => {
-  const iter = pipe(range(), slice(1, 6))[Symbol.iterator]();
+  test("positive middle slice", () => {
+    const iter = pipe(range(), slice(1, 6))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: 2, done: false });
-  t.deepEqual(iter.next(), { value: 3, done: false });
-  t.deepEqual(iter.next(), { value: 4, done: false });
-  t.deepEqual(iter.next(), { value: 5, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: 2, done: false });
+    assert.deepEqual(iter.next(), { value: 3, done: false });
+    assert.deepEqual(iter.next(), { value: 4, done: false });
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("positive end slice", (t) => {
-  const iter = pipe(range(0, 10), slice(5))[Symbol.iterator]();
+  test("positive end slice", () => {
+    const iter = pipe(range(0, 10), slice(5))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
-  t.deepEqual(iter.next(), { value: 6, done: false });
-  t.deepEqual(iter.next(), { value: 7, done: false });
-  t.deepEqual(iter.next(), { value: 8, done: false });
-  t.deepEqual(iter.next(), { value: 9, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.deepEqual(iter.next(), { value: 6, done: false });
+    assert.deepEqual(iter.next(), { value: 7, done: false });
+    assert.deepEqual(iter.next(), { value: 8, done: false });
+    assert.deepEqual(iter.next(), { value: 9, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("negative end slice", (t) => {
-  const iter = pipe(range(0, 10), slice(-3))[Symbol.iterator]();
+  test("negative end slice", () => {
+    const iter = pipe(range(0, 10), slice(-3))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 7, done: false });
-  t.deepEqual(iter.next(), { value: 8, done: false });
-  t.deepEqual(iter.next(), { value: 9, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 7, done: false });
+    assert.deepEqual(iter.next(), { value: 8, done: false });
+    assert.deepEqual(iter.next(), { value: 9, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("negative start slice", (t) => {
-  const iter = pipe(range(0, 10), slice(0, -7))[Symbol.iterator]();
+  test("negative start slice", () => {
+    const iter = pipe(range(0, 10), slice(0, -7))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 0, done: false });
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: 2, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 0, done: false });
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: 2, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("negative middle slice", (t) => {
-  const iter = pipe(range(0, 10), slice(1, -7))[Symbol.iterator]();
+  test("negative middle slice", () => {
+    const iter = pipe(range(0, 10), slice(1, -7))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 1, done: false });
-  t.deepEqual(iter.next(), { value: 2, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 1, done: false });
+    assert.deepEqual(iter.next(), { value: 2, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("double negative slice", (t) => {
-  const iter = pipe(range(0, 10), slice(-5, -2))[Symbol.iterator]();
+  test("double negative slice", () => {
+    const iter = pipe(range(0, 10), slice(-5, -2))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
-  t.deepEqual(iter.next(), { value: 6, done: false });
-  t.deepEqual(iter.next(), { value: 7, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.deepEqual(iter.next(), { value: 6, done: false });
+    assert.deepEqual(iter.next(), { value: 7, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("empty double negative slice", (t) => {
-  const iter = pipe(range(0, 10), slice(-5, -8))[Symbol.iterator]();
+  test("empty double negative slice", () => {
+    const iter = pipe(range(0, 10), slice(-5, -8))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
-});
+    assert.equal(iter.next().done, true);
+  });
 
-test("negative start, positive end", (t) => {
-  const iter = pipe(range(0, 10), slice(-5, 8))[Symbol.iterator]();
+  test("negative start, positive end", () => {
+    const iter = pipe(range(0, 10), slice(-5, 8))[Symbol.iterator]();
 
-  t.deepEqual(iter.next(), { value: 5, done: false });
-  t.deepEqual(iter.next(), { value: 6, done: false });
-  t.deepEqual(iter.next(), { value: 7, done: false });
-  t.is(iter.next().done, true);
-});
+    assert.deepEqual(iter.next(), { value: 5, done: false });
+    assert.deepEqual(iter.next(), { value: 6, done: false });
+    assert.deepEqual(iter.next(), { value: 7, done: false });
+    assert.equal(iter.next().done, true);
+  });
 
-test("empty positive slice", (t) => {
-  const iter = pipe(range(0, 10), slice(8, 5))[Symbol.iterator]();
+  test("empty positive slice", () => {
+    const iter = pipe(range(0, 10), slice(8, 5))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
-});
+    assert.equal(iter.next().done, true);
+  });
 
-test("empty negative slice", (t) => {
-  const iter = pipe(range(0, 10), slice(-5, -8))[Symbol.iterator]();
+  test("empty negative slice", () => {
+    const iter = pipe(range(0, 10), slice(-5, -8))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
-});
+    assert.equal(iter.next().done, true);
+  });
 
-test("empty negative start slice", (t) => {
-  const iter = pipe(range(0, 10), slice(-5, 2))[Symbol.iterator]();
+  test("empty negative start slice", () => {
+    const iter = pipe(range(0, 10), slice(-5, 2))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
-});
+    assert.equal(iter.next().done, true);
+  });
 
-test("empty negative end slice", (t) => {
-  const iter = pipe(range(0, 10), slice(8, -5))[Symbol.iterator]();
+  test("empty negative end slice", () => {
+    const iter = pipe(range(0, 10), slice(8, -5))[Symbol.iterator]();
 
-  t.is(iter.next().done, true);
+    assert.equal(iter.next().done, true);
+  });
 });

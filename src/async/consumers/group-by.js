@@ -3,8 +3,8 @@
  * value of your key generator function.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { groupBy, of } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { groupBy, of } from "yta/async";
  *
  * await pipe(
  *   of(5, 42, 101, 13, 2)

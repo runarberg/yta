@@ -6,8 +6,8 @@
  * return from any running iterators.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { filter, forEach, fromEvent, map } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { filter, forEach, fromEvent, map } from "yta/async";
  *
  * const inputEvents = fromEvent("input", numberField);
  *
@@ -45,6 +45,9 @@ export default function fromEvent(type, target) {
     buffer.push(event);
   }
 
+  /**
+   *
+   */
   function cleanUp() {
     isListening = false;
     target.removeEventListener(type, handler);
@@ -81,6 +84,10 @@ export default function fromEvent(type, target) {
 
     [Symbol.asyncIterator]() {
       return this;
+    },
+
+    async [Symbol.asyncDispose]() {
+      cleanUp();
     },
   };
 }

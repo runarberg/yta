@@ -4,8 +4,8 @@ import some from "./some.js";
  * Consumes the iterator into true if the item is in the sequence.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { includes, of } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { includes, of } from "yta/async";
  *
  * await pipe(of(1, 3, 5), includes(3));
  * // => true

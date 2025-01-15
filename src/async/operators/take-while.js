@@ -3,9 +3,9 @@
  * true, after that the iterator closes.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { takeWhile, toArray } from "andcetera/async";
- * import { asAsync, range } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { takeWhile, toArray } from "yta/async";
+ * import { asAsync, range } from "yta/async";
  *
  * await pipe(
  *   range(10),
@@ -18,8 +18,8 @@
  *
  * **See also:**
  *
- * - [[`dropWhile`]]
- * - [[`take`]]
+ * - {@link dropWhile}
+ * - {@link take}
  *
  * @template A - The item type
  * @param {(item: A) => boolean} p - The predicate function

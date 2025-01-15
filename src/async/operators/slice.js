@@ -15,9 +15,9 @@ import take from "./take.js";
  * and `take(end - start)` in sequence on an iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { asAsync, range } from "andcetera/sync";
- * import { slice } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { asAsync, range } from "yta/sync";
+ * import { slice } from "yta/async";
  *
  * [...pipe(range(15), asAsync(), slice(10))];
  * // => [10, 11, 12, 13, 14]
@@ -35,15 +35,15 @@ import take from "./take.js";
  * // => [5, 6, 7, 8, 9]
  * ```
  *
- * **Note:** Similar to [[`drop`]] and [[`take`]]—because the length of the
+ * **Note:** Similar to {@link drop} and {@link take}—because the length of the
  * iterator is not known—if you use negative index the entire iterator has to be
  * consumed before yielding the first item. This can result in an infinite loop
  * if the iterator is indefinite.
  *
  * **See also:**
  *
- * - [[`drop`]]
- * - [[`take`]]
+ * - {@link drop}
+ * - {@link take}
  * - [`Array.prototype.slice`][Array#slice]
  *
  * [Array#slice]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/slice

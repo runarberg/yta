@@ -1,76 +1,79 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { asAsync, range } from "../../../sync/index.js";
 import { of } from "../../index.js";
 import dropWhile from "../drop-while.js";
 
-test("dropWhile", async (t) => {
-  const pipeline = pipe(
-    range(10),
-    asAsync(),
-    dropWhile((n) => n < 5),
-  );
+suite("async/operators/drop-while", () => {
+  test("dropWhile", async () => {
+    const pipeline = pipe(
+      range(10),
+      asAsync(),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.asyncIterator]();
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  t.deepEqual(await iter.next(), { value: 5, done: false });
-  t.deepEqual(await iter.next(), { value: 6, done: false });
-  t.deepEqual(await iter.next(), { value: 7, done: false });
-  t.deepEqual(await iter.next(), { value: 8, done: false });
-  t.deepEqual(await iter.next(), { value: 9, done: false });
-  t.is((await iter.next()).done, true);
-});
+    assert.deepEqual(await iter.next(), { value: 5, done: false });
+    assert.deepEqual(await iter.next(), { value: 6, done: false });
+    assert.deepEqual(await iter.next(), { value: 7, done: false });
+    assert.deepEqual(await iter.next(), { value: 8, done: false });
+    assert.deepEqual(await iter.next(), { value: 9, done: false });
+    assert.equal((await iter.next()).done, true);
+  });
 
-test("drop all", async (t) => {
-  const pipeline = pipe(
-    range(5),
-    asAsync(),
-    dropWhile((n) => n < 5),
-  );
+  test("drop all", async () => {
+    const pipeline = pipe(
+      range(5),
+      asAsync(),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.asyncIterator]();
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  t.is((await iter.next()).done, true);
-});
+    assert.equal((await iter.next()).done, true);
+  });
 
-test("empty", async (t) => {
-  const pipeline = pipe(
-    of(),
-    dropWhile((n) => n < 5),
-  );
+  test("empty", async () => {
+    const pipeline = pipe(
+      of(),
+      dropWhile((n) => n < 5),
+    );
 
-  const iter = pipeline[Symbol.asyncIterator]();
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  t.is((await iter.next()).done, true);
-});
+    assert.equal((await iter.next()).done, true);
+  });
 
-test("closes child on return", async (t) => {
-  const child = pipe(range(), asAsync());
-  const pipeline = pipe(
-    child,
-    dropWhile((n) => n < 5),
-  );
-  const iter = pipeline[Symbol.asyncIterator]();
+  test("closes child on return", async () => {
+    const child = pipe(range(), asAsync());
+    const pipeline = pipe(
+      child,
+      dropWhile((n) => n < 5),
+    );
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  t.deepEqual(await iter.next(), { value: 5, done: false });
+    assert.deepEqual(await iter.next(), { value: 5, done: false });
 
-  await iter.return();
+    await iter.return();
 
-  t.is((await child.next()).done, true);
-});
+    assert.equal((await child.next()).done, true);
+  });
 
-test("closes children on throw", async (t) => {
-  const child = pipe(range(), asAsync());
-  const pipeline = pipe(
-    child,
-    dropWhile((n) => n < 5),
-  );
-  const iter = pipeline[Symbol.asyncIterator]();
+  test("closes children on throw", async () => {
+    const child = pipe(range(), asAsync());
+    const pipeline = pipe(
+      child,
+      dropWhile((n) => n < 5),
+    );
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  t.deepEqual(await iter.next(), { value: 5, done: false });
+    assert.deepEqual(await iter.next(), { value: 5, done: false });
 
-  await t.throwsAsync(() => iter.throw(new Error("BOOM")));
+    await assert.rejects(() => iter.throw(new Error("BOOM")));
 
-  t.is((await child.next()).done, true);
+    assert.equal((await child.next()).done, true);
+  });
 });

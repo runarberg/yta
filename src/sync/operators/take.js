@@ -2,8 +2,8 @@
  * Take a specific number of items from the front sequence and drop the rest.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { range, take, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { range, take, toArray } from "yta/sync";
  *
  * pipe(range(15), take(5), toArray());
  * // => [0, 1, 2, 3, 4]
@@ -14,8 +14,8 @@
  * length of the iterator.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { range, take, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { range, take, toArray } from "yta/sync";
  *
  * pipe(range(15), take(-5), toArray());
  * // => [10, 11, 12, 13, 14]
@@ -27,9 +27,9 @@
  *
  * **See also:**
  *
- * * [[`slice`]]
- * * [[`take`]]
- * * [[`takeWhile`]]
+ * - {@link slice}
+ * - {@link take}
+ * - {@link takeWhile}
  *
  * @template A - The item type
  * @param {number} n - The number of items to take

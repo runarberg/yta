@@ -2,7 +2,7 @@
  * Create an iterator from each of the arguments.
  *
  * ```js
- * import { of } from "andcetera/sync";
+ * import { of } from "yta/sync";
  *
  * const arr = [];
  *

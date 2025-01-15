@@ -2,9 +2,9 @@
  * Filter items in the iterator leaving only the items that fulfill the predicate.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { filter, toArray } from "andcetera/async";
- * import { asAsync, range } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { filter, toArray } from "yta/async";
+ * import { asAsync, range } from "yta/sync";
  *
  * await pipe(
  *   range(10),

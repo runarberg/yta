@@ -5,8 +5,8 @@
  * sequences starting at 0.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { range, take, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { range, take, toArray } from "yta/sync";
  *
  * pipe(range(), take(5), toArray());
  * // => [0, 1, 2, 3, 4]

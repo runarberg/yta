@@ -3,12 +3,12 @@
  * same sequence over.
  *
  * Note that the items are internally buffered, which might be problematic for
- * long iterators (especially infinite ones). Consider using [[`repeat`]] or
- * [[`flatRepeat`]] if you can.
+ * long iterators (especially infinite ones). Consider using {@link repeat} or
+ * {@link flatRepeat} if you can.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { cycle, of, take } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { cycle, of, take } from "yta/sync";
  *
  * pipe(of(1, -1), cycle(), take(5), toArray());
  * // => [1, -1, 1, -1, 1]
@@ -16,14 +16,14 @@
  *
  * **See also:**
  *
- * * [[`repeat`]]
- * * [[`flatRepeat`]]
+ * - {@link repeat}
+ * - {@link flatRepeat}
  *
  * @template A The item type
  * @returns {(items: Iterable<A>) => Generator<A, void>}
  */
 export default function cycle() {
-  /** @type A[] */
+  /** @type {A[]} */
   const buffer = [];
 
   return function* (items) {

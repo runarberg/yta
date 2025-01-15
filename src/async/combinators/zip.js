@@ -3,9 +3,9 @@
  * tuples. Closes after the shortest of the inputs closes.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { flatRepeat, of, toArray, zip } from "andcetera/async";
- * import { range } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { flatRepeat, of, toArray, zip } from "yta/async";
+ * import { range } from "yta/sync";
  *
  * await pipe(
  *   zip(
@@ -20,7 +20,7 @@
  *
  * **See also:**
  *
- * * [[`zipLongest`]]
+ * - {@link zipLongest}
  *
  * @template {unknown[]} A - Tuple type with item type of each input iterator
  * @param {{ [K in keyof A]: AsyncIterable<A[K]> }} items The iterators to be

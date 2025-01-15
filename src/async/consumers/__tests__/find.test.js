@@ -1,40 +1,43 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of } from "../../index.js";
 import find from "../find.js";
 
-test("find", async (t) => {
-  const result = await pipe(
-    of(
-      { name: "foo", value: 5 },
-      { name: "bar", value: 42 },
-      { name: "baz", value: 101 },
-    ),
-    find(({ name }) => name === "bar"),
-  );
+suite("async/consumers/find", () => {
+  test("find", async () => {
+    const result = await pipe(
+      of(
+        { name: "foo", value: 5 },
+        { name: "bar", value: 42 },
+        { name: "baz", value: 101 },
+      ),
+      find(({ name }) => name === "bar"),
+    );
 
-  t.deepEqual(result, { name: "bar", value: 42 });
-});
+    assert.deepEqual(result, { name: "bar", value: 42 });
+  });
 
-test("not found", async (t) => {
-  const result = await pipe(
-    of(
-      { name: "foo", value: 5 },
-      { name: "bar", value: 42 },
-      { name: "baz", value: 101 },
-    ),
-    find(({ name }) => name === "quux"),
-  );
+  test("not found", async () => {
+    const result = await pipe(
+      of(
+        { name: "foo", value: 5 },
+        { name: "bar", value: 42 },
+        { name: "baz", value: 101 },
+      ),
+      find(({ name }) => name === "quux"),
+    );
 
-  t.is(result, undefined);
-});
+    assert.equal(result, undefined);
+  });
 
-test("empty", async (t) => {
-  const result = await pipe(
-    of(),
-    find(() => true),
-  );
+  test("empty", async () => {
+    const result = await pipe(
+      of(),
+      find(() => true),
+    );
 
-  t.is(result, undefined);
+    assert.equal(result, undefined);
+  });
 });

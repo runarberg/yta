@@ -1,13 +1,16 @@
-import test from "ava";
+import assert from "node:assert/strict";
+import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
 import { of, range } from "../../index.js";
 import count from "../count.js";
 
-test("count", (t) => {
-  t.is(pipe(range(4), count()), 4);
-});
+suite("sync/consumers/count", () => {
+  test("count", () => {
+    assert.equal(pipe(range(4), count()), 4);
+  });
 
-test("empty", (t) => {
-  t.is(pipe(of(), count()), 0);
+  test("empty", () => {
+    assert.equal(pipe(of(), count()), 0);
+  });
 });

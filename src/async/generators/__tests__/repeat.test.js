@@ -1,54 +1,56 @@
-import test from "ava";
+import test, { suite } from "node:test";
 
 import { of } from "../../index.js";
 import repeat from "../repeat.js";
 
-test("repeat indefinitely", async (t) => {
-  t.plan(10);
+suite("async/generators/repeat", () => {
+  test("repeat indefinitely", async (t) => {
+    t.plan(10);
 
-  const pipeline = repeat(() => of(1, -1));
-  const iter = pipeline[Symbol.asyncIterator]();
+    const pipeline = repeat(() => of(1, -1));
+    const iter = pipeline[Symbol.asyncIterator]();
 
-  for (let i = 0; i < 3; i += 1) {
-    const next = await iter.next();
+    for (let i = 0; i < 3; i += 1) {
+      const next = await iter.next();
 
-    if (next.done) {
-      t.fail("Iterator finished early");
+      if (next.done) {
+        t.assert.fail("Iterator finished early");
 
-      return;
+        return;
+      }
+
+      const inner = next.value[Symbol.asyncIterator]();
+
+      t.assert.deepEqual(await inner.next(), { value: 1, done: false });
+      t.assert.deepEqual(await inner.next(), { value: -1, done: false });
+      t.assert.equal((await inner.next()).done, true);
     }
 
-    const inner = next.value[Symbol.asyncIterator]();
+    t.assert.equal((await iter.next()).done, false);
+  });
 
-    t.deepEqual(await inner.next(), { value: 1, done: false });
-    t.deepEqual(await inner.next(), { value: -1, done: false });
-    t.is((await inner.next()).done, true);
-  }
+  test("repeat n times", async (t) => {
+    t.plan(10);
 
-  t.is((await iter.next()).done, false);
-});
+    const pipeline = repeat(() => of(1, -1), 3);
+    const iter = pipeline[Symbol.asyncIterator]();
 
-test("repeat n times", async (t) => {
-  t.plan(10);
+    for (let i = 0; i < 3; i += 1) {
+      const next = await iter.next();
 
-  const pipeline = repeat(() => of(1, -1), 3);
-  const iter = pipeline[Symbol.asyncIterator]();
+      if (next.done) {
+        t.assert.fail("Iterator finished early");
 
-  for (let i = 0; i < 3; i += 1) {
-    const next = await iter.next();
+        return;
+      }
 
-    if (next.done) {
-      t.fail("Iterator finished early");
+      const inner = next.value[Symbol.asyncIterator]();
 
-      return;
+      t.assert.deepEqual(await inner.next(), { value: 1, done: false });
+      t.assert.deepEqual(await inner.next(), { value: -1, done: false });
+      t.assert.equal((await inner.next()).done, true);
     }
 
-    const inner = next.value[Symbol.asyncIterator]();
-
-    t.deepEqual(await inner.next(), { value: 1, done: false });
-    t.deepEqual(await inner.next(), { value: -1, done: false });
-    t.is((await inner.next()).done, true);
-  }
-
-  t.is((await iter.next()).done, true);
+    t.assert.equal((await iter.next()).done, true);
+  });
 });

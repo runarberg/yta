@@ -5,8 +5,8 @@ import map from "./map.js";
  * for inspecting items they pass through a pipeline.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { aside, map, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { aside, map, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(5),
@@ -23,7 +23,7 @@ import map from "./map.js";
  *
  * **See also:**
  *
- * * [[`forEach`]]
+ * - {@link forEach}
  *
  * @template A The item type
  * @param {(item: A) => void} fn The side effect producing function

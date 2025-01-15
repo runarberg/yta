@@ -3,20 +3,20 @@
  * Negative values count backwards from the end.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { at, of } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { at, of } from "yta/sync";
  *
  * pipe(of("foo", "bar", "baz", "quux"), at(2));
  * // => "baz"
-
+ 
  * pipe(of("foo", "bar", "baz", "quux"), at(-1));
  * // => "quux"
  * ```
  *
  * **See also:**
  *
- * * [[`first`]]
- * * [[`last`]]
+ * - {@link first}
+ * - {@link last}
  *
  * @template A
  * @param {number} index

@@ -3,8 +3,8 @@
  * after that every item is emitted.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { dropWhile, range, toArray } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { dropWhile, range, toArray } from "yta/sync";
  *
  * pipe(
  *   range(10),
@@ -16,8 +16,8 @@
  *
  * **See also:**
  *
- * * [[`drop`]]
- * * [[`takeWhile`]]
+ * - {@link drop}
+ * - {@link takeWhile}
  *
  * @template A - The item type
  * @param {(item: A) => boolean} p - The predicate function

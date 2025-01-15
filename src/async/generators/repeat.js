@@ -2,9 +2,9 @@
  * Create an iterator of iterators that repeats n times (defaults to indefinetly).
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, repeat, take, toArray } from "andcetera/async";
- * import { asAsync, range } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { of, repeat, take, toArray } from "yta/async";
+ * import { asAsync, range } from "yta/sync";
  *
  * await pipe(
  *   repeat(() => pipe(range(), asAsync(), take(3))),
@@ -18,8 +18,8 @@
  * If you provide `n` as a second argument, repeat the sequence `n` many times.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, repeat, toArray } from "andcetera/async";
+ * import { pipe } from "yta";
+ * import { of, repeat, toArray } from "yta/async";
  *
  * await pipe(
  *   repeat(() => of(1, -1), 3),
@@ -31,7 +31,7 @@
  *
  * **See also:**
  *
- * * [[`flatRepeat`]]
+ * - {@link flatRepeat}
  *
  * @template A
  * @template {AsyncIterable<A>} I

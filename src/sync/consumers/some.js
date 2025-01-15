@@ -3,8 +3,8 @@
  * the items in the sequence.
  *
  * ```js
- * import { pipe } from "andcetera";
- * import { of, some } from "andcetera/sync";
+ * import { pipe } from "yta";
+ * import { of, some } from "yta/sync";
  *
  * pipe(
  *   of(1, 3, 5),
@@ -27,8 +27,8 @@
  *
  * **See also:**
  *
- * - [[`every`]]
- * - [[`includes`]]
+ * - {@link every}
+ * - {@link includes}
  *
  * @template A
  * @param {(item: A) => boolean} p - The predicate function
