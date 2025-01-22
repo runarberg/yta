@@ -1,5 +1,5 @@
 {
-  "name": "yta",
+  "name": "@runarberg/yta",
   "version": "0.1.0",
   "description": "Tools to further your iterator pipelines",
   "type": "module",
@@ -24,6 +24,7 @@
     "docs": "typedoc src/index.js src/sync/index.js src/async/index.js",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
+    "prepare": "npm run types",
     "test": "node --test",
     "test:coverage": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info ",
     "pretest:coverage": "mkdir -p coverage",
