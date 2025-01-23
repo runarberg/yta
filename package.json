@@ -1,5 +1,5 @@
 {
-  "name": "@runarberg/yta",
+  "name": "yta",
   "version": "0.1.0",
   "description": "Tools to further your iterator pipelines",
   "type": "module",
@@ -22,12 +22,15 @@
   "scripts": {
     "check": "tsc",
     "docs": "typedoc src/index.js src/sync/index.js src/async/index.js",
+    "docs:ci": "npm run docs && npm run test:coverage-badge && cp coverage/badge.svg docs/coverage-badge.svg",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "npm run types",
+    "prettier": "prettier --write .",
+    "prettier:ci": "prettier --check .",
     "test": "node --test",
-    "test:coverage": "node --test --experimental-test-coverage --test-reporter=spec --test-reporter-destination stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info ",
-    "pretest:coverage": "mkdir -p coverage",
+    "test:coverage": "node --test --experimental-test-coverage",
+    "test:coverage-badge": "mkdir -p coverage && node --test --experimental-test-coverage --test-reporter ./test/reporters/coverage-badge-reporter.js --test-reporter-destination coverage/badge.svg",
     "test:watch": "node --test --watch",
     "types": "tsc src/**/*.js --allowJS --declaration --declarationMap --emitDeclarationOnly --esModuleInterop --outDir types"
   },
@@ -50,6 +53,7 @@
     "@eslint/compat": "^1.2.5",
     "@eslint/js": "^9.18.0",
     "@types/node": "^22.10.6",
+    "badge-maker": "^4.1.0",
     "eslint": "^9.18.0",
     "eslint-plugin-jsdoc": "^50.6.1",
     "eslint-plugin-prettier": "^5.2.1",
