@@ -1,6 +1,6 @@
 /**
  * Generate a sequence of numbers between `start` and `stop` (start inclusive;
- * stop non-inclusive) . If `stop` is not specified generate `start` many
+ * stop non-inclusive). If `stop` is not specified generate `start` many
  * number starting at 0. If `start` is not specified generate an infinitly long
  * sequences starting at 0.
  *
