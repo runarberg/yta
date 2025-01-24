@@ -6,4 +6,8 @@ export default {
     "./src/sync/index.js",
   ],
   out: "docs",
+  headings: {
+    readme: false,
+    document: false,
+  },
 };
