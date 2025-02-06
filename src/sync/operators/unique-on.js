@@ -16,10 +16,10 @@
  *   toArray(),
  * );
  * // => [
- *   { id: 1, type: "a" },
- *   { id: 2, type: "b" },
- *   { id: 4, type: "c" },
- * ]
+ * //   { id: 1, type: "a" },
+ * //   { id: 2, type: "b" },
+ * //   { id: 4, type: "c" },
+ * // ]
  * ```
  *
  * @template A - The item type

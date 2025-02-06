@@ -10,4 +10,5 @@ export { default as map } from "./map.js";
 export { default as slice } from "./slice.js";
 export { default as take } from "./take.js";
 export { default as takeWhile } from "./take-while.js";
+export { default as unique } from "./unique.js";
 export { default as uniqueOn } from "./unique-on.js";
