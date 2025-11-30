@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test, { suite } from "node:test";
 
 import { pipe } from "../../../index.js";
-import { map, of, range } from "../../index.js";
+import { of, range } from "../../index.js";
 import groupBy from "../group-by.js";
 
 suite("sync/consumers/group-by", () => {
@@ -16,6 +16,25 @@ suite("sync/consumers/group-by", () => {
     assert.deepEqual(result.get("odd"), [1, 3, 5, 7, 9]);
   });
 
+  test("with mapFn", () => {
+    const result = pipe(
+      of(
+        { name: "foo", value: 5 },
+        { name: "foo", value: 42 },
+        { name: "bar", value: 101 },
+        { name: "foo", value: 13 },
+        { name: "bar", value: 2 },
+      ),
+      groupBy(
+        ({ name }) => name,
+        ({ value }) => value,
+      ),
+    );
+
+    assert.deepEqual(result.get("foo"), [5, 42, 13]);
+    assert.deepEqual(result.get("bar"), [101, 2]);
+  });
+
   test("collect into an object", () => {
     const result = pipe(
       of(
@@ -25,8 +44,10 @@ suite("sync/consumers/group-by", () => {
         { name: "foo", value: 13 },
         { name: "bar", value: 2 },
       ),
-      groupBy(({ name }) => name),
-      map(([key, values]) => [key, values.map(({ value }) => value)]),
+      groupBy(
+        ({ name }) => name,
+        ({ value }) => value,
+      ),
       Object.fromEntries,
     );
 

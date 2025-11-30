@@ -20,12 +20,14 @@
  *
  * @template A
  * @template K
+ * @template [B=A]
  * @param {(item: A) => K} getKey
- * @returns {(items: AsyncIterable<A>) => Promise<Map<K, A[]>>}
+ * @param {(item: A) => B} [mapFn]
+ * @returns {(items: AsyncIterable<A>) => Promise<Map<K, B[]>>}
  */
-export default function groupBy(getKey) {
+export default function groupBy(getKey, mapFn) {
   return async (items) => {
-    /** @type {Map<K, A[]>} */
+    /** @type {Map<K, B[]>} */
     const map = new Map();
 
     for await (const item of items) {
@@ -37,7 +39,7 @@ export default function groupBy(getKey) {
         map.set(key, values);
       }
 
-      values.push(item);
+      values.push(/** @type {B} */ (mapFn ? mapFn(item) : item));
     }
 
     return map;

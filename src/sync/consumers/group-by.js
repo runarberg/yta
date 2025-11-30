@@ -2,12 +2,14 @@
  * Collect the items of the iterator into a map of arrays keyed by the return
  * value of your key generator function.
  *
+ * Optionally pass a map function which will map the inner values.
+ *
  * Note we return a `Map` which natively implements `Symbol.iterator` which
  * means you are free to chain another operator after it’s consumed.
  *
  * ```js
  * import { pipe } from "yta";
- * import { group-by, map, of } from "yta/sync";
+ * import { group-by, of } from "yta/sync";
  *
  * pipe(
  *   of(
@@ -17,8 +19,10 @@
  *     { name: "foo", value: 13 },
  *     { name: "bar", value: 2 },
  *   ),
- *   groupBy(({ name }) => name),
- *   map(([key, values]) => [key, values.map(({ value }) => value)]),
+ *   groupBy(
+ *     ({ name }) => name,
+ *     ({ value }) => value,
+ *   ),
  *   Object.fromEntries,
  * );
  * // => { "foo": [5, 42, 13], "bar": [101, 2] }
@@ -30,12 +34,14 @@
  *
  * @template A
  * @template K
+ * @template [B=A]
  * @param {(item: A) => K} getKey
- * @returns {(items: Iterable<A>) => Map<K, A[]>}
+ * @param {(item: A) => B} [mapFn]
+ * @returns {(items: Iterable<A>) => Map<K, B[]>}
  */
-export default function groupBy(getKey) {
+export default function groupBy(getKey, mapFn) {
   return (items) => {
-    /** @type {Map<K, A[]>} */
+    /** @type {Map<K, B[]>} */
     const map = new Map();
 
     for (const item of items) {
@@ -47,7 +53,7 @@ export default function groupBy(getKey) {
         map.set(key, values);
       }
 
-      values.push(item);
+      values.push(/** @type {B} */ (mapFn ? mapFn(item) : item));
     }
 
     return map;
