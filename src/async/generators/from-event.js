@@ -31,16 +31,20 @@
  * for a better event driven structure.
  *
  * @template {EventTarget} Target
- * @param {string} type
+ * @template {Event} Ev
+ * @template {string} Key
+ * @param {Key} type
  * @param {Target} target
- * @returns {AsyncGenerator<Event, void, void>}
+ * @returns {AsyncGenerator<Ev, void, void>}
  */
 export default function fromEvent(type, target) {
-  /** @type {Event[]} */
+  /** @type {Ev[]} */
   const buffer = [];
   let isListening = true;
 
-  /** @type {EventListener} */
+  /**
+   * @param {Ev} event
+   */
   function handler(event) {
     buffer.push(event);
   }
@@ -50,10 +54,10 @@ export default function fromEvent(type, target) {
    */
   function cleanUp() {
     isListening = false;
-    target.removeEventListener(type, handler);
+    target.removeEventListener(type, /** @type {EventListener} */ (handler));
   }
 
-  target.addEventListener(type, handler);
+  target.addEventListener(type, /** @type {EventListener} */ (handler));
 
   return {
     return() {
@@ -78,7 +82,7 @@ export default function fromEvent(type, target) {
         return { value: undefined, done: true };
       }
 
-      const value = /** @type {Event} */ (buffer.shift());
+      const value = /** @type {Ev} */ (buffer.shift());
       return { value, done: false };
     },
 
