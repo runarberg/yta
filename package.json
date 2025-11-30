@@ -50,16 +50,16 @@
   "homepage": "https://github.com/runarberg/yta#readme",
   "license": "MIT",
   "devDependencies": {
-    "@eslint/compat": "^1.2.5",
+    "@eslint/compat": "^2.0.0",
     "@eslint/js": "^9.18.0",
-    "@types/node": "^22.10.6",
-    "badge-maker": "^4.1.0",
-    "eslint": "^9.18.0",
-    "eslint-plugin-jsdoc": "^50.6.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "globals": "^15.14.0",
-    "prettier": "3.4.2",
-    "typedoc": "^0.27.6",
-    "typescript": "^5.7.3"
+    "@types/node": "^24.10.1",
+    "badge-maker": "^5.0.2",
+    "eslint": "^9.39.1",
+    "eslint-plugin-jsdoc": "^61.4.1",
+    "eslint-plugin-prettier": "^5.5.4",
+    "globals": "^16.5.0",
+    "prettier": "3.7.3",
+    "typedoc": "^0.28.15",
+    "typescript": "^5.9.3"
   }
 }

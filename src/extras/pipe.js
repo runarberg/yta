@@ -1,6 +1,8 @@
+/* eslint-disable jsdoc/reject-any-type */
 /**
  * @typedef {(a: any) => any} AnyFn
  */
+/* eslint-enable jsdoc/reject-any-type */
 
 /* eslint-disable jsdoc/valid-types */
 /**
